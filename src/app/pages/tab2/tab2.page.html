@@ -1,13 +1,94 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title class="text-center"> Tab 2 </ion-title>
+  <ion-toolbar class="bg-white shadow-sm">
+    <ion-title class="text-center font-semibold text-slate-800 text-lg">
+      Cupones Activos {{ activeCount() > 0 ? `(${activeCount()})` : '' }}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content
+  [fullscreen]="true"
+  class="bg-gradient-to-b from-slate-50 to-slate-100"
+>
+  <div class="flex items-center justify-center min-h-screen px-4 py-8">
+    <div class="w-full max-w-sm">
+      <!-- Card Principal con Ionic -->
+      <ion-card
+        class="rounded-3xl shadow-lg border border-slate-200 transition-all duration-300"
+      >
+        <!-- Header Card -->
+        <ion-card-header
+          class="bg-gradient-to-r from-blue-500 to-blue-600 text-center"
+        >
+          <ion-card-title class="text-white text-2xl font-bold">
+            Código QR
+          </ion-card-title>
+          <ion-text class="text-blue-100 block text-sm mt-2">
+            <p>Escanea tus cupones activos</p>
+          </ion-text>
+        </ion-card-header>
+
+        <!-- QR Container -->
+        <ion-card-content
+          class="flex items-center justify-center bg-white min-h-96"
+        >
+          <!-- Loading State -->
+          @if(isLoading()){
+          <div class="text-center">
+            <ion-spinner name="crescent" color="primary"></ion-spinner>
+            <ion-text color="medium" class="block mt-4">
+              <p class="text-sm font-medium">Cargando cupones...</p>
+            </ion-text>
+          </div>
+          }
+          <!-- QR Display -->
+          @else if(QrCode()){
+          <div
+            class="qr-wrapper rounded-2xl bg-slate-50 p-6 border-2 border-slate-200 shadow-inner"
+          >
+            <qrcode
+              [qrdata]="QrCode()"
+              [width]="260"
+              [errorCorrectionLevel]="'M'"
+              elementType="svg"
+              class="qr-code"
+            />
+          </div>
+          }
+          <!-- Empty State -->
+          @else {
+          <div class="text-center py-12">
+            <ion-text color="medium">
+              <h2 class="text-lg font-semibold mb-2">Sin cupones activos</h2>
+              <p class="text-sm text-slate-500">
+                Activa cupones en Tab 1 para generar QR
+              </p>
+            </ion-text>
+          </div>
+          }
+        </ion-card-content>
+
+        <!-- Footer Card -->
+        <ion-card-content class="bg-slate-50 border-t border-slate-200 pt-4">
+          <ion-text color="medium">
+            <p class="text-xs text-center leading-relaxed">
+              Cada cupón activo se incluye en el código QR. Comparte este código
+              para canjear tus cupones.
+            </p>
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Info Box con componentes Ionic -->
+      <ion-note
+        class="mt-6 block bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4"
+      >
+        <p class="text-blue-900 text-sm font-semibold mb-2">💡 Tip</p>
+        <p class="text-blue-800 text-xs">
+          Los cambios en Tab 1 se sincronizan automáticamente. Vuelve de Tab 1
+          al Tab 2 para ver el QR actualizado.
+        </p>
+      </ion-note>
+    </div>
+  </div>
 </ion-content>
