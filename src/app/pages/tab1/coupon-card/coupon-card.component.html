@@ -1,0 +1,27 @@
+<ion-card [class.active]="coupon()?.active" (click)="onCardClick()">
+  <!-- Image Container -->
+  <div class="image-container">
+    <ion-img [src]="coupon()?.img" />
+    <!-- Discount Badge -->
+    <ion-badge color="danger" class="discount-badge">
+      {{ coupon()?.discount }} % OFF
+    </ion-badge>
+  </div>
+
+  <!-- Card Content -->
+  <ion-card-header>
+    <!-- Category Indicator -->
+    <div class="category-container">
+      <ion-badge color="primary">
+        {{ coupon()?.category }}
+      </ion-badge>
+    </div>
+
+    <!-- Product Name -->
+    <ion-card-title>
+      {{ coupon()?.name }}
+    </ion-card-title>
+  </ion-card-header>
+
+  <!-- Card Body -->
+</ion-card>

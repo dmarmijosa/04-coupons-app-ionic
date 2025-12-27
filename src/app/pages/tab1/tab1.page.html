@@ -20,8 +20,50 @@
   </ion-segment>
 
   <ion-segment-view>
-    <ion-segment-content id="candies">First</ion-segment-content>
-    <ion-segment-content id="drinks">Second</ion-segment-content>
-    <ion-segment-content id="meats">Third</ion-segment-content>
+    <ion-segment-content id="candies">
+      <div class="p-4">
+        <div
+          class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+        >
+          @for(coupon of coupons | filterCouponCategory:'candies'; track
+          coupon.idProduct) {
+          <app-coupon-card
+            (couponClicked)="toggleCouponStatus($event)"
+            [coupon]="coupon"
+          ></app-coupon-card>
+          }
+        </div>
+      </div>
+    </ion-segment-content>
+    <ion-segment-content id="drinks">
+      <div class="p-4">
+        <div
+          class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+        >
+          @for(coupon of coupons | filterCouponCategory:'drinks'; track
+          coupon.idProduct) {
+          <app-coupon-card
+            (couponClicked)="toggleCouponStatus($event)"
+            [coupon]="coupon"
+          ></app-coupon-card>
+          }
+        </div>
+      </div>
+    </ion-segment-content>
+    <ion-segment-content id="meats">
+      <div class="p-4">
+        <div
+          class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+        >
+          @for(coupon of coupons | filterCouponCategory:'meats'; track
+          coupon.idProduct) {
+          <app-coupon-card
+            (couponClicked)="toggleCouponStatus($event)"
+            [coupon]="coupon"
+          ></app-coupon-card>
+          }
+        </div>
+      </div>
+    </ion-segment-content>
   </ion-segment-view>
 </ion-content>

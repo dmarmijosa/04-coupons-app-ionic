@@ -8,6 +8,11 @@ import {
   IonLabel,
   IonSegmentView,
   IonSegmentContent,
+  IonGrid,
+  IonCol,
+  IonCard,
+  IonRow,
+  IonImg,
 } from '@ionic/angular/standalone';
 
 export const plugins = [
@@ -20,4 +25,9 @@ export const plugins = [
   IonLabel,
   IonSegmentView,
   IonSegmentContent,
+  IonGrid,
+  IonCol,
+  IonCard,
+  IonRow,
+  IonImg,
 ];
