@@ -20,7 +20,11 @@ import {
 } from '@ionic/angular/standalone';
 import { CouponService } from '../../services/coupon.service';
 import { QRCodeComponent } from 'angularx-qrcode';
-
+import {
+  GetBrightnessReturnValue,
+  ScreenBrightness,
+} from '@capacitor-community/screen-brightness';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -43,7 +47,9 @@ import { QRCodeComponent } from 'angularx-qrcode';
 })
 export class Tab2Page {
   private couponService = inject(CouponService);
+  private platform = inject(Platform);
 
+  private currentBrightness = signal<any>({});
   // Estado reactivo con signal
   private coupons = signal<any[]>([]);
   isLoading = signal(false);
@@ -65,6 +71,17 @@ export class Tab2Page {
   async ionViewWillEnter() {
     // Recarga cada vez que entras a la página (sincronización en tiempo real)
     await this.loadCoupons();
+
+    if (!this.platform.is('desktop')) {
+      // Ajusta el brillo de la pantalla solo en dispositivos móviles
+      try {
+        const brightness = await ScreenBrightness.getBrightness();
+        this.currentBrightness.set(brightness);
+        await this.setMaxBrightness();
+      } catch (error) {
+        console.error('Error setting brightness:', error);
+      }
+    }
   }
 
   private async loadCoupons() {
@@ -76,6 +93,38 @@ export class Tab2Page {
       console.error('Error loading coupons:', error);
     } finally {
       this.isLoading.set(false);
+    }
+  }
+
+  async setMaxBrightness() {
+    if (!this.platform.is('desktop')) {
+      try {
+        await ScreenBrightness.setBrightness({ brightness: 1.0 });
+      } catch (error) {
+        console.error('Error setting max brightness:', error);
+      }
+    }
+  }
+
+  async restoreBrightness() {
+    if (!this.platform.is('desktop')) {
+      try {
+        const original = this.currentBrightness();
+        if (original && original.brightness !== undefined) {
+          await ScreenBrightness.setBrightness({
+            brightness: original.brightness,
+          });
+        }
+      } catch (error) {
+        console.error('Error restoring brightness:', error);
+      }
+    }
+  }
+
+  async ionViewWillLeave() {
+    if (!this.platform.is('desktop')) {
+      // Restaura el brillo original al salir de la página
+      await this.restoreBrightness();
     }
   }
 }
