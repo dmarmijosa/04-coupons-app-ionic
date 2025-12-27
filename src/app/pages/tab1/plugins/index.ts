@@ -12,7 +12,11 @@ import {
   IonCol,
   IonCard,
   IonRow,
+  IonIcon,
+  IonItem,
   IonImg,
+  IonButtons,
+  IonButton,
 } from '@ionic/angular/standalone';
 
 export const plugins = [
@@ -30,4 +34,8 @@ export const plugins = [
   IonCard,
   IonRow,
   IonImg,
+  IonIcon,
+  IonItem,
+  IonButtons,
+  IonButton,
 ];

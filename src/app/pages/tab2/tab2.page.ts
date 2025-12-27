@@ -13,15 +13,15 @@ import {
 } from '@capacitor-community/screen-brightness';
 import { Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
-import { state } from '@angular/animations';
+
 import { plugins } from './plugins';
-import { FilterCouponCategoryPipe } from 'src/app/pipes/filter-coupon-category-pipe';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [plugins, QRCodeComponent, FilterCouponCategoryPipe],
+  imports: [plugins, QRCodeComponent],
 })
 export class Tab2Page {
   private couponService = inject(CouponService);
