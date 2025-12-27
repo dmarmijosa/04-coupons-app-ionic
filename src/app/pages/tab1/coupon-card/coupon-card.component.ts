@@ -21,6 +21,6 @@ export class CouponCardComponent implements OnInit {
 
   ngOnInit() {}
   onCardClick() {
-    this.couponClicked.emit(this.coupon);
+    this.couponClicked.emit(this.coupon());
   }
 }

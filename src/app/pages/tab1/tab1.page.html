@@ -1,69 +1,73 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title class="text-center font-['Dancing_Script']"
+  <ion-toolbar class="bg-white shadow-sm">
+    <ion-title class="text-center font-['Dancing_Script'] text-lg tracking-wide"
       >Mis cupones</ion-title
     >
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-segment>
-    <ion-segment-button value="candies" content-id="candies">
-      <ion-label>Candies</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="drinks" content-id="drinks">
-      <ion-label>Drinks</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="meats" content-id="meats">
-      <ion-label>Meats</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+<ion-content [fullscreen]="true" class="bg-slate-50">
+  <div class="max-w-6xl mx-auto px-4 pb-6">
+    <ion-segment
+      class="mt-4 bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-100"
+    >
+      <ion-segment-button value="candies" content-id="candies">
+        <ion-label class="font-semibold text-slate-700">Candies</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="drinks" content-id="drinks">
+        <ion-label class="font-semibold text-slate-700">Drinks</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="meats" content-id="meats">
+        <ion-label class="font-semibold text-slate-700">Meats</ion-label>
+      </ion-segment-button>
+    </ion-segment>
 
-  <ion-segment-view>
-    <ion-segment-content id="candies">
-      <div class="p-4">
-        <div
-          class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
-        >
-          @for(coupon of coupons | filterCouponCategory:'candies'; track
-          coupon.idProduct) {
-          <app-coupon-card
-            (couponClicked)="toggleCouponStatus($event)"
-            [coupon]="coupon"
-          ></app-coupon-card>
-          }
+    <ion-segment-view class="mt-6">
+      <ion-segment-content id="candies">
+        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+          <div
+            class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+          >
+            @for(coupon of coupons | filterCouponCategory:'candies'; track
+            coupon.idProduct) {
+            <app-coupon-card
+              (couponClicked)="toggleCouponStatus($event)"
+              [coupon]="coupon"
+            ></app-coupon-card>
+            }
+          </div>
         </div>
-      </div>
-    </ion-segment-content>
-    <ion-segment-content id="drinks">
-      <div class="p-4">
-        <div
-          class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
-        >
-          @for(coupon of coupons | filterCouponCategory:'drinks'; track
-          coupon.idProduct) {
-          <app-coupon-card
-            (couponClicked)="toggleCouponStatus($event)"
-            [coupon]="coupon"
-          ></app-coupon-card>
-          }
+      </ion-segment-content>
+      <ion-segment-content id="drinks">
+        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+          <div
+            class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+          >
+            @for(coupon of coupons | filterCouponCategory:'drinks'; track
+            coupon.idProduct) {
+            <app-coupon-card
+              (couponClicked)="toggleCouponStatus($event)"
+              [coupon]="coupon"
+            ></app-coupon-card>
+            }
+          </div>
         </div>
-      </div>
-    </ion-segment-content>
-    <ion-segment-content id="meats">
-      <div class="p-4">
-        <div
-          class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
-        >
-          @for(coupon of coupons | filterCouponCategory:'meats'; track
-          coupon.idProduct) {
-          <app-coupon-card
-            (couponClicked)="toggleCouponStatus($event)"
-            [coupon]="coupon"
-          ></app-coupon-card>
-          }
+      </ion-segment-content>
+      <ion-segment-content id="meats">
+        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+          <div
+            class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+          >
+            @for(coupon of coupons | filterCouponCategory:'meats'; track
+            coupon.idProduct) {
+            <app-coupon-card
+              (couponClicked)="toggleCouponStatus($event)"
+              [coupon]="coupon"
+            ></app-coupon-card>
+            }
+          </div>
         </div>
-      </div>
-    </ion-segment-content>
-  </ion-segment-view>
+      </ion-segment-content>
+    </ion-segment-view>
+  </div>
 </ion-content>
