@@ -5,19 +5,6 @@ import {
   computed,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardContent,
-  IonCardTitle,
-  IonText,
-  IonNote,
-  IonSpinner,
-} from '@ionic/angular/standalone';
 import { CouponService } from '../../services/coupon.service';
 import { QRCodeComponent } from 'angularx-qrcode';
 import {
@@ -25,25 +12,16 @@ import {
   ScreenBrightness,
 } from '@capacitor-community/screen-brightness';
 import { Platform } from '@ionic/angular';
+import { App } from '@capacitor/app';
+import { state } from '@angular/animations';
+import { plugins } from './plugins';
+import { FilterCouponCategoryPipe } from 'src/app/pipes/filter-coupon-category-pipe';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    QRCodeComponent,
-    IonCard,
-    IonCardHeader,
-    IonCardContent,
-    IonCardTitle,
-    IonText,
-    IonNote,
-    IonSpinner,
-  ],
+  imports: [plugins, QRCodeComponent, FilterCouponCategoryPipe],
 })
 export class Tab2Page {
   private couponService = inject(CouponService);
@@ -78,6 +56,15 @@ export class Tab2Page {
         const brightness = await ScreenBrightness.getBrightness();
         this.currentBrightness.set(brightness);
         await this.setMaxBrightness();
+        if (this.platform.is('ios') || this.platform.is('android')) {
+          App.addListener('appStateChange', async (state) => {
+            if (state.isActive) {
+              await this.setMaxBrightness();
+            } else {
+              await this.restoreBrightness();
+            }
+          });
+        }
       } catch (error) {
         console.error('Error setting brightness:', error);
       }
@@ -125,6 +112,7 @@ export class Tab2Page {
     if (!this.platform.is('desktop')) {
       // Restaura el brillo original al salir de la página
       await this.restoreBrightness();
+      App.removeAllListeners();
     }
   }
 }

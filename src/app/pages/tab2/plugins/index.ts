@@ -1,0 +1,26 @@
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
+  IonText,
+  IonNote,
+  IonSpinner,
+} from '@ionic/angular/standalone';
+export const plugins = [
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
+  IonText,
+  IonNote,
+  IonSpinner,
+];
