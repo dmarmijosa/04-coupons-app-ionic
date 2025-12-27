@@ -1,13 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="text-center"> Tab 1 </ion-title>
+    <ion-title class="text-center font-['Dancing_Script']"
+      >Mis cupones</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-segment>
+    <ion-segment-button value="candies" content-id="candies">
+      <ion-label>Candies</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="drinks" content-id="drinks">
+      <ion-label>Drinks</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="meats" content-id="meats">
+      <ion-label>Meats</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-segment-view>
+    <ion-segment-content id="candies">First</ion-segment-content>
+    <ion-segment-content id="drinks">Second</ion-segment-content>
+    <ion-segment-content id="meats">Third</ion-segment-content>
+  </ion-segment-view>
 </ion-content>
