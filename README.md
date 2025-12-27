@@ -158,7 +158,9 @@ Este proyecto fue creado con Ionic Framework.
 
 ## 👤 Autor
 
-**Ionic Framework**
+**dmarmijosa**
+
+- GitHub: [@dmarmijosa](https://github.com/dmarmijosa)
 
 ---
 
